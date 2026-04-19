@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ─────────────────────────────────────────────────── */
+@layer base {
+  * { box-sizing: border-box; }
+  
+  html, body, #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-dark-900 text-slate-100 font-sans antialiased;
+    background: radial-gradient(ellipse at top left, #1a1040 0%, #0a0a0f 60%);
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-dark-800; }
+  ::-webkit-scrollbar-thumb { @apply bg-primary-600 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-primary-500; }
+}
+
+/* ── Components ───────────────────────────────────────────── */
+@layer components {
+  /* Glass card */
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+  }
+
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1rem;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply relative overflow-hidden px-6 py-3 rounded-xl font-semibold text-white
+           bg-gradient-to-r from-primary-600 to-primary-500
+           hover:from-primary-500 hover:to-primary-400
+           transition-all duration-300 ease-out
+           shadow-glow-primary hover:shadow-glow-primary
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+  }
+
+  .btn-primary:hover::after { opacity: 0.05; }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply px-6 py-3 rounded-xl font-semibold text-slate-300
+           border border-slate-600 hover:border-primary-500 hover:text-white
+           bg-transparent hover:bg-primary-500/10
+           transition-all duration-300;
+  }
+
+  /* Success button */
+  .btn-success {
+    @apply px-6 py-3 rounded-xl font-semibold text-white
+           bg-gradient-to-r from-accent-600 to-accent-500
+           hover:from-accent-500 hover:to-accent-400
+           transition-all duration-300 shadow-glow-green;
+  }
+
+  /* Form input */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl
+           bg-dark-600 border border-dark-400
+           text-slate-100 placeholder-slate-500
+           focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           transition-all duration-200;
+  }
+
+  /* Form label */
+  .form-label {
+    @apply block text-sm font-medium text-slate-400 mb-1.5;
+  }
+
+  /* Step badge */
+  .step-badge {
+    @apply flex items-center justify-center w-10 h-10 rounded-full
+           bg-primary-600 text-white font-bold text-sm
+           shadow-glow-primary;
+  }
+
+  .step-badge-done {
+    @apply flex items-center justify-center w-10 h-10 rounded-full
+           bg-accent-600 text-white font-bold text-sm;
+  }
+
+  /* Status pill */
+  .status-pill-green {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold
+           bg-accent-500/20 text-accent-400 border border-accent-500/30;
+  }
+
+  .status-pill-red {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold
+           bg-danger-500/20 text-danger-400 border border-danger-500/30;
+  }
+
+  .status-pill-blue {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold
+           bg-primary-500/20 text-primary-300 border border-primary-500/30;
+  }
+
+  /* Alert boxes */
+  .alert-success {
+    @apply flex items-start gap-3 p-4 rounded-xl
+           bg-accent-500/10 border border-accent-500/30 text-accent-400;
+  }
+
+  .alert-error {
+    @apply flex items-start gap-3 p-4 rounded-xl
+           bg-danger-500/10 border border-danger-500/30 text-danger-400;
+  }
+
+  .alert-info {
+    @apply flex items-start gap-3 p-4 rounded-xl
+           bg-primary-500/10 border border-primary-500/30 text-primary-300;
+  }
+
+  /* Page container */
+  .page-wrapper {
+    @apply min-h-screen flex flex-col;
+  }
+
+  .page-content {
+    @apply flex-1 flex items-center justify-center p-4 py-8;
+  }
+
+  /* Card */
+  .form-card {
+    @apply glass w-full max-w-lg p-8 shadow-glass;
+  }
+
+  /* Divider */
+  .divider {
+    @apply flex items-center gap-4 my-6;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    @apply flex-1 h-px bg-dark-400;
+  }
+
+  .divider span {
+    @apply text-slate-500 text-sm;
+  }
+}
+
+/* ── Custom Animations ────────────────────────────────────── */
+@layer utilities {
+  /* Fingerprint scan line */
+  .scan-line {
+    animation: scanLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scanLine {
+    0%   { transform: translateY(0);    opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
+
+  /* Glowing ring */
+  .ring-pulse {
+    animation: ringPulse 2s ease-out infinite;
+  }
+
+  @keyframes ringPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7); }
+    70%  { box-shadow: 0 0 0 20px rgba(99, 102, 241, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  }
+
+  /* OTP digit glow */
+  .otp-digit {
+    animation: otpGlow 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes otpGlow {
+    from { text-shadow: 0 0 10px rgba(99, 102, 241, 0.5); }
+    to   { text-shadow: 0 0 30px rgba(99, 102, 241, 1), 0 0 60px rgba(99, 102, 241, 0.5); }
+  }
+
+  /* Gate opening animation */
+  .gate-open {
+    animation: gateOpen 0.5s ease-out forwards;
+  }
+
+  @keyframes gateOpen {
+    from { transform: scaleX(1); }
+    to   { transform: scaleX(0.1); }
+  }
+
+  /* Shimmer loading */
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* Typing cursor */
+  .cursor-blink::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+}
