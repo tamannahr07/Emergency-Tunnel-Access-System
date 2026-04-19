@@ -71,14 +71,6 @@ This system ensures that only authorized personnel can access the gate using mul
 
 ---
 
-## ⚠️ Limitations
-
-- Works on predefined RFID cards only  
-- No cloud/database integration (offline system)  
-- Basic authentication (can be enhanced)  
-
----
-
 ## 🔒 Future Improvements
 
 - Biometric authentication (fingerprint)  
